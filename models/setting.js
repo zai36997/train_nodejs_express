@@ -16,6 +16,5 @@ const schema = new mongoose.Schema({
         default: Date.now
     }
 })
-
 const Setting = mongoose.model("Setting", schema);
 module.exports = Setting

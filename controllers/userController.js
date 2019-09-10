@@ -1,8 +1,19 @@
 const User = require('../models/user')
-
+const {validationResult} = require('express-validator')
 exports.register = async (req,res,next) =>{
     try {
     const {name,email,password} = req.body
+
+
+const errorValidation =validationResult(req)
+if (!errorValidation.isEmpty()) {
+    const error =new Error('Please input requierd information')
+   error.statusCode = 422
+   error.validation = errorValidation.array();
+   throw error
+}
+
+
     const exitemail = await User.findOne({email:email})
     if(exitemail){
         const error = new Error('This email is not avaliable.')
