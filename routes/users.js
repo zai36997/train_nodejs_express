@@ -7,6 +7,7 @@ router.post('/register',
 body('name').not().isEmpty().withMessage('Please input name'),
 body('email').not().isEmpty().withMessage('Please input email').isEmail().withMessage('Wrong format Email'),
 body('password').not().isEmpty().withMessage('Please input password').isLength({min: 3}).withMessage('Password is more then 3 charecter'),
+body('rold').not().isEmpty().withMessage('Please input rold'),
  userController.register)
  
  router.post('/login',userController.login)

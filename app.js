@@ -9,6 +9,10 @@ const mongoose = require('mongoose')
 const config = require('./config/index')
 const settingRouter = require('./routes/setting')
 const errorHander = require('./middlewares/errorHandler')
+const passportJWT = require('./middlewares/passoprtJWT')
+const shopRouter = require('./routes/shop')
+
+
 mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true , useCreateIndex: true})
 var app = express();
 
@@ -21,7 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/user',usersRouter)
-app.use('/api/setting', settingRouter);
+app.use('/api/setting',passportJWT.isLogin, settingRouter);
+app.use('/api/shop', shopRouter);
 //Mongoose เชื่อมต่อ MongoDB
 
 app.use(errorHander)

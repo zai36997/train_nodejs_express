@@ -16,6 +16,11 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+     rold:{
+        type: String,
+        required: true,
+        trim: true
     }
 })
 
@@ -30,5 +35,5 @@ schema.methods.validPassword = async function(password){
     return isLogin
 }
 
-const User = mongoose.model("User", schema);
+const User = mongoose.model("User", schema,"users");
 module.exports = User 
