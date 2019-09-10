@@ -8,7 +8,7 @@ var usersRouter = require('./routes/users');
 const mongoose = require('mongoose')
 const config = require('./config/index')
 const settingRouter = require('./routes/setting')
-
+const errorHander = require('./middlewares/errorHandler')
 mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true , useCreateIndex: true})
 var app = express();
 
@@ -24,5 +24,6 @@ app.use('/api/user',usersRouter)
 app.use('/api/setting', settingRouter);
 //Mongoose เชื่อมต่อ MongoDB
 
+app.use(errorHander)
   
 module.exports = app;

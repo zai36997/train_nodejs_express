@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
         trim: true
     },
     age:{
-        type: String,
+        type: Number,
         required: true,
         trim: true,
         unique: true

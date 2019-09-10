@@ -1,7 +1,7 @@
 
 const Setting = require('../models/setting')
 exports.index = async (req,res,next) => {
-     const {name,age} = req.body
+     //const {name,age} = req.body
      const setting = await Setting.find()
      
     
