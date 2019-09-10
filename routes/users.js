@@ -9,5 +9,6 @@ body('email').not().isEmpty().withMessage('Please input email').isEmail().withMe
 body('password').not().isEmpty().withMessage('Please input password').isLength({min: 3}).withMessage('Password is more then 3 charecter'),
  userController.register)
  
+ router.post('/login',userController.login)
 
 module.exports = router;

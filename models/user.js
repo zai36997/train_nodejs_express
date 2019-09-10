@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const schema = new mongoose.Schema({
     name:{
         type: String,
@@ -23,6 +23,11 @@ schema.methods.encryptPassword = async function(password){
     const salt = await bcrypt.genSalt(5)
     const hash = await bcrypt.hash(password,salt)
     return hash
+}
+
+schema.methods.validPassword = async function(password){
+    const isLogin = await bcrypt.compare(password,this.password)
+    return isLogin
 }
 
 const User = mongoose.model("User", schema);

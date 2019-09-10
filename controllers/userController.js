@@ -5,7 +5,7 @@ exports.register = async (req,res,next) =>{
     const {name,email,password} = req.body
 
 
-const errorValidation =validationResult(req)
+const errorValidation = validationResult(req)
 if (!errorValidation.isEmpty()) {
     const error =new Error('Please input requierd information')
    error.statusCode = 422
@@ -35,4 +35,32 @@ if (!errorValidation.isEmpty()) {
         next(error)
     }
     
+}
+
+exports.login = async (req,res,next) =>{
+try {
+    const {email,password} =req.body
+    const user = await User.findOne({
+        email: email
+    })
+    if (!user) {
+        const error = new Error('Email not found')
+        error.statusCode = 401
+        throw error
+    }
+
+    const validPassword = await user.validPassword(password)
+if(!validPassword){
+    const error = new Error('Password or Email incorrect')
+        error.statusCode = 401
+        throw error
+}
+res.json({
+    message: "ok"
+})
+    
+} catch (error) {
+    next(error)
+    
+}
 }
