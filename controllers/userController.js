@@ -79,3 +79,15 @@ try {
     
 }
 }
+
+exports.me = async (req,res,next) => {
+    return res.json({
+        user:{
+            id : req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+            rold: req.user.rold
+        }
+    })
+    }
+   

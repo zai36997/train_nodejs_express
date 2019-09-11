@@ -6,8 +6,6 @@ const schema = new mongoose.Schema({
     },
     photo:{
         type: String
-        
-        
     },
     location:{
        lat:{
