@@ -48,17 +48,15 @@ return res.status(200).json({
 
  exports.store = async (req,res,next) => {
 
-    //const {name,photo,location :{lat,lgn }} = req.body
-    let shop = new Shop(req.body)
-    // store.name = name
-    // store.photo = photo
-    // store.location.lat = lat
-    // store.locationlgn.lgn = lgn
-    await shop.save()
-    // console.log(req.body)
+    try {
+        let shop = new Shop(req.body)
+        await shop.save()
 
-    return res.status(200).json({
-        mgs: "ok"
-    })
+        return res.status(200).json({
+            mgs: "sucessfully!!"
+        })
+    } catch (error) {
+        next(error)
+    }
  }
 
