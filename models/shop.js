@@ -17,6 +17,21 @@ const schema = new mongoose.Schema({
        }
     }
 },
-{timestamps: true})
-const Shop = mongoose.model("Shop", schema);
+{
+    timestamps: true,
+    collection: 'shops',
+    toJSON:{
+        virtuals: true
+    },
+    toObject:{
+        virtuals:true
+    }
+})
+
+schema.virtual('manus',{
+    ref: 'Menu',
+    localField: '_id',
+    foreignField: 'shop'
+})
+const Shop = mongoose.model("Shop", schema,"shops");
 module.exports = Shop
