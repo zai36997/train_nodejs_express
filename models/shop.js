@@ -7,13 +7,16 @@ const schema = new mongoose.Schema({
     photo:{
         type: String
         
+        
     },
     location:{
        lat:{
-        type: Number
+        type: Number,
+        required: true
        },
        lgn:{
-        type: Number
+        type: Number,
+        required: true
        }
     }
 },
