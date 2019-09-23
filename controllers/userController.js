@@ -42,7 +42,7 @@ if (!errorValidation.isEmpty()) {
 
 exports.login = async (req,res,next) =>{
 try {
-    const {email,password} =req.body
+    const {email,pwdHash} =req.body
     const user = await User.findOne({
         email: email
     })
@@ -53,7 +53,7 @@ try {
         throw error
     }
     //เช็ก email และ password
-    const validPassword = await user.validPassword(password)
+    const validPassword = await user.validPassword(pwdHash)
     if(!validPassword){
         const error = new Error('Password or Email incorrect')
             error.statusCode = 401
